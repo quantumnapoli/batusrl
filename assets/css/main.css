@@ -241,8 +241,20 @@ body[data-hero="photo"] .main { padding-top: var(--gutter); }
    Singolo lavoro
    -------------------------------------------------------------------------- */
 .project-hero { padding-top: 0; }
-.project-hero .frame { aspect-ratio: 4 / 5; }
-@media (min-width: 768px) { .project-hero .frame { aspect-ratio: 16 / 9; } }
+/* L'altezza non supera lo schermo: su finestre larghe e basse la larghezza si
+   restringe (centrata) invece di far sforare la foto sotto il bordo visibile. */
+.project-hero .frame {
+  aspect-ratio: 4 / 5;
+  max-height: calc(100svh - var(--gutter) * 2);
+  width: min(100%, calc((100svh - var(--gutter) * 2) * 4 / 5));
+  margin-inline: auto;
+}
+@media (min-width: 768px) {
+  .project-hero .frame {
+    aspect-ratio: 16 / 9;
+    width: min(100%, calc((100svh - var(--gutter) * 2) * 16 / 9));
+  }
+}
 /* Se la proporzione forza un ritaglio, sacrifica la cima, mai la base della foto. */
 .project-hero .frame img { object-position: center bottom; }
 .project-head { row-gap: 32px; }
