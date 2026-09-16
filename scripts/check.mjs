@@ -1,6 +1,6 @@
 import { chromium } from 'playwright-core';
 const base = 'http://127.0.0.1:4173';
-const pages = ['/', '/lavori/', '/lavori/giardino-sul-mare-patu/', '/lavori/archivio-di-stato-napoli/', '/stampa/', '/bio/'];
+const pages = ['/', '/lavori/', '/lavori/archivio-di-stato-napoli/', '/lavori/giardini-del-molosiglio/', '/stampa/', '/studio/'];
 const shots = process.argv[2] || '.';
 import { mkdirSync } from 'node:fs'; mkdirSync(shots, { recursive: true });
 // I font esterni vengono bloccati: in sandbox non c'è rete, e non fanno parte del sito.
@@ -47,7 +47,7 @@ for (const [label, opts] of [['desktop', { viewport: { width: 1440, height: 900 
 // menu mobile + header hide
 const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }); await blockFonts(ctx);
 const page = await ctx.newPage();
-await page.goto(base + '/bio/', { waitUntil: 'load' }); await page.waitForTimeout(500);
+await page.goto(base + '/studio/', { waitUntil: 'load' }); await page.waitForTimeout(500);
 await page.evaluate(() => window.scrollTo(0, 800)); await page.waitForTimeout(900);
 const hiddenDown = await page.evaluate(() => document.querySelector('.header').classList.contains('is-hidden'));
 await page.evaluate(() => window.scrollTo(0, 500)); await page.waitForTimeout(900);
