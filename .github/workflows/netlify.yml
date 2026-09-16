@@ -1,0 +1,44 @@
+# Pubblica il sito su Netlify a ogni push su main.
+# Richiede due segreti nel repository (Settings → Secrets and variables → Actions):
+#   NETLIFY_AUTH_TOKEN  personal access token creato su app.netlify.com/user/applications
+#   NETLIFY_SITE_ID     b6f2a339-2a68-468c-bc89-e50f1632d357 (progetto "batusrl")
+# Se i segreti mancano il workflow termina senza fare nulla.
+name: Deploy su Netlify
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: netlify-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+      NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+    steps:
+      - name: Verifica segreti
+        id: check
+        run: |
+          if [ -z "$NETLIFY_AUTH_TOKEN" ] || [ -z "$NETLIFY_SITE_ID" ]; then
+            echo "Segreti Netlify mancanti: deploy saltato." >&2
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.check.outputs.ok == 'true'
+
+      - uses: actions/setup-node@v4
+        if: steps.check.outputs.ok == 'true'
+        with:
+          node-version: 22
+
+      - name: Deploy in produzione
+        if: steps.check.outputs.ok == 'true'
+        run: npx --yes netlify-cli@latest deploy --prod --dir . --site "$NETLIFY_SITE_ID" --message "GitHub Actions ${GITHUB_SHA::7}"
