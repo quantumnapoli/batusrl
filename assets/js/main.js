@@ -26,19 +26,29 @@ const main = document.querySelector('.main');
   menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
 })();
 
-/* ---------- Header: si nasconde scendendo, riappare salendo ---------- */
+/* ---------- Header: si nasconde scendendo, riappare salendo.
+   Sopra una foto a tutta pagina il testo resta bianco (.is-over). ---------- */
 (() => {
   const header = document.querySelector('.header');
   if (!header) return;
+  const overTarget = document.querySelector('.hero, .project-hero');
   let last = window.scrollY, ticking = false;
   const update = () => {
     const y = window.scrollY;
-    if (document.body.classList.contains('menu-open')) { header.classList.remove('is-hidden'); }
-    else if (y > last + 4 && y > 120) header.classList.add('is-hidden');
-    else if (y < last - 4 || y <= 120) header.classList.remove('is-hidden');
+    const open = document.body.classList.contains('menu-open');
+    if (open || y <= 120) header.classList.remove('is-hidden');
+    else if (y > last + 4) header.classList.add('is-hidden');
+    else if (y < last - 4) header.classList.remove('is-hidden');
+    if (overTarget) {
+      const bottom = overTarget.getBoundingClientRect().bottom;
+      header.classList.toggle('is-over', bottom > header.offsetHeight * 0.75);
+    }
     last = y; ticking = false;
   };
-  window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(update); ticking = true; } }, { passive: true });
+  const onScroll = () => { if (!ticking) { requestAnimationFrame(update); ticking = true; } };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
 })();
 
 /* ---------- Transizioni di pagina ---------- */
