@@ -112,6 +112,86 @@ export const projects = [
       { img: 'secco-05', ratio: '3-2', layout: 'full', alt: 'Il giardino al mattino' },
     ],
   },
+  {
+    slug: 'relais-regina-giovanna',
+    title: 'Il giardino del Relais Regina Giovanna',
+    place: 'Sorrento (Na)',
+    year: '2025',
+    kind: 'Giardino di struttura ricettiva',
+    with: '',
+    photo: '',
+    cover: 'relais-01',
+    alt: 'Giardino del Relais Regina Giovanna affacciato sulla costiera sorrentina',
+    text: [
+      'Un giardino sospeso tra gli ulivi e la scogliera, pensato per accompagnare gli ospiti dall’ingresso fino al mare. Terrazzamenti, essenze mediterranee e punti d’ombra per vivere il verde in ogni stagione.', // verificare
+    ],
+    gallery: [
+      { img: 'relais-02', ratio: '3-2', layout: 'full', alt: 'Percorso tra gli ulivi verso la scogliera' },
+      { img: 'relais-03', ratio: '4-5', layout: 'left', alt: 'Terrazzamento fiorito' },
+      { img: 'relais-04', ratio: '4-5', layout: 'right', alt: 'Vista sulla costiera sorrentina' },
+      { img: 'relais-05', ratio: '3-2', layout: 'small', alt: 'Dettaglio delle essenze mediterranee' },
+    ],
+  },
+  {
+    slug: 'giardino-sul-mare',
+    title: 'Un giardino sul mare',
+    place: 'Patù (Le)',
+    year: '2021',
+    kind: 'Giardino privato',
+    with: '',
+    photo: '',
+    cover: 'mare-01',
+    alt: 'Giardino privato affacciato sul mare del Salento',
+    text: [
+      'Un giardino costiero pensato per resistere a vento e salsedine, con specie che accompagnano lo sguardo fino all’orizzonte del mare. Volumi morbidi, fioriture scalari, poca manutenzione.', // verificare
+    ],
+    gallery: [
+      { img: 'mare-02', ratio: '4-5', layout: 'full', alt: 'Vialetto tra le aiuole verso il mare' },
+      { img: 'mare-03', ratio: '4-5', layout: 'left', alt: 'Fioritura mediterranea' },
+      { img: 'mare-04', ratio: '4-3', layout: 'right', alt: 'Il giardino visto dall’alto' },
+      { img: 'mare-05', ratio: '3-2', layout: 'small', alt: 'Dettaglio del giardino al tramonto' },
+    ],
+  },
+  {
+    slug: 'terrazzo-tra-i-muri',
+    title: 'Terrazzo tra i muri',
+    place: 'Lecce',
+    year: '2022',
+    kind: 'Terrazza privata',
+    with: '',
+    photo: '',
+    cover: 'muri-01',
+    alt: 'Terrazzo racchiuso tra i muri in pietra leccese',
+    text: [
+      'Un terrazzo tra sole e ombra, chiuso tra muri antichi: vasi e fioriere disposti per accompagnare la luce nelle diverse ore del giorno, in un angolo raccolto nel centro di Lecce.', // verificare
+    ],
+    gallery: [
+      { img: 'muri-02', ratio: '3-2', layout: 'full', alt: 'Il terrazzo tra i muri in pietra' },
+      { img: 'muri-03', ratio: '4-5', layout: 'left', alt: 'Vasi e fioriere disposti lungo il muro' },
+      { img: 'muri-04', ratio: '4-5', layout: 'right', alt: 'Dettaglio di una fioritura in vaso' },
+      { img: 'muri-05', ratio: '3-2', layout: 'small', alt: 'Il terrazzo nel tardo pomeriggio' },
+    ],
+  },
+  {
+    slug: 'due-piccoli-giardini',
+    title: 'Due piccoli giardini',
+    place: 'Massa Lubrense (Na)',
+    year: '2021',
+    kind: 'Giardino privato',
+    with: '',
+    photo: '',
+    cover: 'piccoli-01',
+    alt: 'Due piccoli giardini privati sulla penisola sorrentina',
+    text: [
+      'Due spazi piccoli e diversi tra loro, trattati come stanze verdi: piante da vaso e da terra, percorsi minimi, un uso attento della luce disponibile in ogni angolo.', // verificare
+    ],
+    gallery: [
+      { img: 'piccoli-02', ratio: '4-3', layout: 'full', alt: 'Il primo dei due giardini' },
+      { img: 'piccoli-03', ratio: '4-5', layout: 'left', alt: 'Percorso tra le piante in vaso' },
+      { img: 'piccoli-04', ratio: '4-5', layout: 'right', alt: 'Il secondo giardino' },
+      { img: 'piccoli-05', ratio: '3-2', layout: 'small', alt: 'Dettaglio di una fioritura' },
+    ],
+  },
 ];
 
 export const hero = ['hero-1', 'hero-2', 'hero-3', 'hero-4'].map((img, i) => ({
