@@ -1,0 +1,39 @@
+# Converte le foto caricate in src-photos/ in WebP e AVIF (800 e 1600 px)
+# e committa il risultato in assets/img/. Si attiva da solo a ogni caricamento.
+name: Ottimizza le foto
+
+on:
+  push:
+    branches: [main]
+    paths: ['src-photos/**']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ottimizza-foto
+  cancel-in-progress: false
+
+jobs:
+  converti:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - name: Genera WebP e AVIF
+        run: npm run images -- --keep
+      - name: Committa le immagini generate
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/img
+          if git diff --cached --quiet; then
+            echo "Nessuna immagine nuova da pubblicare."
+          else
+            git commit -m "Aggiorna le immagini ottimizzate da src-photos"
+            git push
+          fi
