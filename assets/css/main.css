@@ -240,7 +240,7 @@ body[data-hero="photo"] .main { padding-top: var(--gutter); }
 /* --------------------------------------------------------------------------
    Singolo lavoro
    -------------------------------------------------------------------------- */
-.project-hero { padding-top: var(--gutter); }
+.project-hero { padding-top: 0; }
 .project-hero .frame { aspect-ratio: 4 / 5; }
 @media (min-width: 768px) { .project-hero .frame { aspect-ratio: 16 / 9; } }
 .project-head { row-gap: 32px; }

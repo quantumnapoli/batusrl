@@ -4,11 +4,16 @@ import { site, statement, projects, hero, press, studio } from '../content/site.
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+// Le immagini in assets/img/ hanno cache-control "immutable" di un anno: la versione
+// nell'URL cambia ad ogni build, così il browser non serve mai una foto vecchia
+// dalla cache dopo un aggiornamento delle foto sorgente.
+const ASSET_V = Date.now();
+
 const picture = (name, alt, { eager = false, sizes = '(min-width: 768px) 60vw, 100vw' } = {}) => `
 <picture>
-  <source type="image/avif" srcset="/assets/img/${name}-800.avif 800w, /assets/img/${name}-1600.avif 1600w" sizes="${sizes}">
-  <source type="image/webp" srcset="/assets/img/${name}-800.webp 800w, /assets/img/${name}-1600.webp 1600w" sizes="${sizes}">
-  <img src="/assets/img/${name}-1600.webp" alt="${esc(alt)}" ${eager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async">
+  <source type="image/avif" srcset="/assets/img/${name}-800.avif?v=${ASSET_V} 800w, /assets/img/${name}-1600.avif?v=${ASSET_V} 1600w" sizes="${sizes}">
+  <source type="image/webp" srcset="/assets/img/${name}-800.webp?v=${ASSET_V} 800w, /assets/img/${name}-1600.webp?v=${ASSET_V} 1600w" sizes="${sizes}">
+  <img src="/assets/img/${name}-1600.webp?v=${ASSET_V}" alt="${esc(alt)}" ${eager ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async">
 </picture>`;
 
 const NAV = [
