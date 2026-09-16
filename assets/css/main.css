@@ -243,6 +243,8 @@ body[data-hero="photo"] .main { padding-top: var(--gutter); }
 .project-hero { padding-top: 0; }
 .project-hero .frame { aspect-ratio: 4 / 5; }
 @media (min-width: 768px) { .project-hero .frame { aspect-ratio: 16 / 9; } }
+/* Se la proporzione forza un ritaglio, sacrifica la cima, mai la base della foto. */
+.project-hero .frame img { object-position: center bottom; }
 .project-head { row-gap: 32px; }
 .project-head__title { grid-column: 1 / -1; }
 .project-head__text { grid-column: 1 / -1; }
